@@ -30,7 +30,7 @@ h1 {
     position: relative;
     background-color: #fff;
     margin: 20px auto;
-    border: 2px solid #333;
+    border: 1px solid #333;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -98,7 +98,7 @@ p {
     position: absolute;
     width: 50px;
     height: 50px;
-    background-color: #3498db;
+    background-color: #4da9e7;
     color: white;
     display: flex;
     justify-content: center;
@@ -110,17 +110,17 @@ p {
 }
 
 .box:hover {
-    background-color: #2980b9;
+    background-color: #3e80ac;
     transform: scale(1.1);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 .box.red {
-    background-color: #e74c3c;
+    background-color: #bc5549;
 }
 
 .box.clicked {
-    background-color: #2ecc71;
+    background-color: #579a73;
     pointer-events: none;
 }
 

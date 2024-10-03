@@ -7,6 +7,7 @@ let gameInProgress = false;
 let canClick = false;  // Prevent clicks before numbers are hidden
 let gridSize;
 let timerBar;
+let timerDuration = 1000;
 
 const gameArea = document.getElementById('game-area');
 const startButton = document.getElementById('start-button');
@@ -20,11 +21,12 @@ window.addEventListener('resize', updateGameAreaSize);  // Update the game area 
 function startGame() {
     level = 2;
     score = 0;
+    timerDuration = 1000;
     resetGame();
     createBoxes(level);  // Start with the current level (initially 2 boxes)
     displayNumbers();
-    startTimerBar(3000);  // Start the reverse timing bar with a 3-second duration
-    setTimeout(hideNumbers, 3000);  // Hide numbers after 3 seconds
+    startTimerBar(timerDuration);  // Start the reverse timing bar with a 3-second duration
+    setTimeout(hideNumbers, timerDuration);  // Hide numbers after 3 seconds
 }
 
 function resetGame() {
@@ -36,7 +38,7 @@ function resetGame() {
     gameInProgress = true;
     canClick = false;  // Prevent clicks until numbers are hidden
     updateGameAreaSize();  // Recalculate game area size dynamically
-    startTimerBar(3000)
+    startTimerBar(timerDuration)
     //resetTimerBar();   // Reset the timing bar
 }
 
@@ -82,6 +84,8 @@ function updateGameAreaSize() {
 
 function createBoxes(num) {
     const gridPositions = [];
+    const padding = gridSize * 0.05;  // Add padding to prevent overlap
+
     // Create an array of grid positions (e.g., [0,0], [0,1], ..., [7,7] for an 8x8 grid)
     for (let row = 0; row < 8; row++) {
         for (let col = 0; col < 8; col++) {
@@ -98,9 +102,11 @@ function createBoxes(num) {
         const box = document.createElement('div');
         box.classList.add('box');
         const boxSize = gridSize * 0.9;  // Make the boxes 90% of the grid size (to add padding)
-        box.style.width = box.style.height = `${boxSize}px`;  // Set box size
-        box.style.top = `${row * gridSize}px`;
-        box.style.left = `${col * gridSize}px`;
+
+        // Ensure boxes don't overlap with the boundaries by adjusting for padding
+        box.style.width = box.style.height = `${boxSize}px`;
+        box.style.top = `${row * gridSize + padding}px`;  // Add padding to the top
+        box.style.left = `${col * gridSize + padding}px`;  // Add padding to the left
 
         box.dataset.number = numbers[i];  // Assign a unique number to each box
         box.dataset.clicked = false;  // Ensure box can be clicked only once
@@ -114,6 +120,7 @@ function createBoxes(num) {
         order.push(numbers[i]);  // Store the correct order (based on the shuffled numbers)
     }
 }
+
 
 function displayNumbers() {
     boxes.forEach(box => {
@@ -163,12 +170,13 @@ function handleBoxClick(index) {
 function nextLevel() {
     level++;  // Increase the level by one
     userOrder = [];  // Reset user order for the next round
+    timerDuration += 450;
     setTimeout(() => {
         resetGame();  // Clear the board
         createBoxes(level);  // Create one more box than the previous level
         displayNumbers();  // Show numbers again for a brief period
-        startTimerBar(3000);  // Restart the timer bar
-        setTimeout(hideNumbers, 3000);  // Hide numbers after 3 seconds
+        startTimerBar(timerDuration);  // Restart the timer bar
+        setTimeout(hideNumbers, timerDuration);  // Hide numbers after 3 seconds
     }, 1000);  // Short delay before starting the next round
 }
 
@@ -181,7 +189,7 @@ function restartGame() {
 function showAllNumbersAndTurnRed() {
     boxes.forEach(box => {
         box.textContent = box.dataset.number;  // Show the hidden number
-        box.style.backgroundColor = 'red';  // Turn the box red
+        box.style.backgroundColor = '#e74c3c';  // Turn the box red
     });
     setTimeout(() => alert('Game over! Restarting...'), 500);  // Delay for game over message
 }
