@@ -1,0 +1,134 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.game-container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.game-area {
+    width: 80vw;
+    height: 60vh;
+    position: relative;
+    background-color: #fff;
+    margin: 20px auto;
+    border: 2px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+#timer-container {
+    display: none; 
+    width: 50%; 
+    height: 8px; 
+    background-color: lightgray; 
+    margin: 10px auto;  /* Centers the timer bar */
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#timer-bar {
+    width: 100%; 
+    height: 100%; 
+    background-color: #e74c3c;
+    border-radius: 20px;
+    transition: width 0.01s linear;
+}
+
+button {
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+p {
+    font-size: 20px;
+    color: #333;
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+.game-area {
+    position: relative;
+    background-color: #f9f9f9;
+    margin: 0 auto;
+    overflow: hidden; /* Ensures boxes stay within bounds */
+}
+
+.box {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: #3498db;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.box:hover {
+    background-color: #2980b9;
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.box.red {
+    background-color: #e74c3c;
+}
+
+.box.clicked {
+    background-color: #2ecc71;
+    pointer-events: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.box {
+    animation: fadeIn 0.3s ease-in-out;
+}
